@@ -48,6 +48,15 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Componentes visuais do PrimeFaces para JSF -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>15.0.10</version>
+            <classifier>jakarta</classifier>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Framework de testes unitários -->
         <dependency>
             <groupId>junit</groupId>
