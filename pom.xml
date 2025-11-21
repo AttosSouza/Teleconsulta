@@ -10,20 +10,45 @@
     <name>teleconsulta</name>
 
     <url>http://maven.apache.org</url>
+
     <build>
         <finalName>teleconsulta</finalName>
     </build>
 
     <dependencies>
-        <!-- Servlet -->
+        <!-- API de Servlets usada pelo Tomcat (fornecida pelo servidor) -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Junit -->
+        <!-- Implementação do JSF (Faces) usada pela aplicação -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.faces</artifactId>
+            <version>4.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- CDI para injeção de dependências no ambiente servlet -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-shaded</artifactId>
+            <version>5.1.0.Final</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- API de Expressões EL usada pelo JSF -->
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>4.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Framework de testes unitários -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
