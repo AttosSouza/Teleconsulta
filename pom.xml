@@ -10,6 +10,10 @@
     <name>teleconsulta</name>
 
     <url>http://maven.apache.org</url>
+    <build>
+        <finalName>teleconsulta</finalName>
+    </build>
+
     <dependencies>
         <!-- Servlet -->
         <dependency>
