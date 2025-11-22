@@ -3,28 +3,46 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Teleconsulta com JSF</title>
+    <title>Login - Teleconsulta</title>
 </h:head>
 <h:body>
-    <h1>JSF 2.3!</h1>
 
     <p:growl id="growl" showDetail="true" life="6000" />
 
-    <h:form>
-        <p:commandButton value="ir para o cadastro" action="#{navigationBean.irParaCadastro()}" icon="pi pi-arrow-right"/>
 
-        <p:separator style="margin-top: 20px; margin-bottom: 20px;" />
+    <div style="
+        width: 350px;
+        margin: 80px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px #ccc;
+    ">
 
-        <p:commandButton value="Testar PostgreSQL"
-                         action="#{connectionTestBean.testPostgresConnection()}"
-                         update="growl"
-                         icon="pi pi-database"
-                         style="margin-right: 10px;"/>
+        <h2 style="color:#006d77; margin-bottom:25px;">Login</h2>
 
-        <p:commandButton value="Testar SQLite"
-                         action="#{connectionTestBean.testSqliteConnection()}"
-                         update="growl"
-                         icon="pi pi-database" />
-    </h:form>
+        <h:form>
+
+            <p:outputLabel for="email" value="Seu e-mail" />
+            <p:inputText id="email"
+                         placeholder="email@exemplo.com"
+                         style="width:100%; margin-top:7px; margin-bottom:15px;"
+                          />
+
+            <p:outputLabel for="senha" value="Sua senha" />
+            <p:password id="senha"
+                        placeholder="Digite sua senha"
+                        style="width:100%; margin-top:7px; margin-bottom:15px;"
+                        feedback="false"
+                        />
+
+            <br/><br/>
+
+            <p:commandButton value="Entrar"
+                             style="width:100%; background:#219ebc; border:0;"/>
+
+        </h:form>
+
+    </div>
 </h:body>
 </html>
