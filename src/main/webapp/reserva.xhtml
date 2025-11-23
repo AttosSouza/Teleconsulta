@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Gerenciar Reservas</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Reservas</h2>
+
+    <!-- FORMULÁRIO -->
+    <h:form id="formReserva">
+
+        <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+        <p:panel header="Cadastro de Reserva" style="margin-bottom:20px;">
+
+            <div class="p-fluid p-formgrid p-grid">
+
+                <!-- DATA/HORA INÍCIO -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Data/Hora de Início" for="inicio"/>
+                    <p:datePicker id="inicio"
+                                  value="#{reservaBean.reserva.dataHoraInicio}"
+                                  showTime="true"
+                                  hourFormat="24"
+                                  required="true"
+                                  style="width:100%"/>
+                </div>
+
+                <!-- DATA/HORA TÉRMINO -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Data/Hora de Término" for="fim"/>
+                    <p:datePicker id="fim"
+                                  value="#{reservaBean.reserva.dataHoraTermino}"
+                                  showTime="true"
+                                  hourFormat="24"
+                                  required="true"
+                                  style="width:100%"/>
+                </div>
+
+                <!-- SALA -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Sala" for="sala"/>
+                    <p:selectOneMenu id="sala"
+                                     value="#{reservaBean.reserva.sala}"
+                                     required="true"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="" />
+                        <f:selectItems value="#{reservaBean.salas}"
+                                       var="s"
+                                       itemLabel="#{s.nome}"
+                                       itemValue="#{s}"/>
+                    </p:selectOneMenu>
+                </div>
+
+                <!-- USUÁRIO -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Usuário" for="usuario"/>
+                    <p:selectOneMenu id="usuario"
+                                     value="#{reservaBean.reserva.usuario}"
+                                     required="true"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="" />
+                        <f:selectItems value="#{reservaBean.usuarios}"
+                                       var="u"
+                                       itemLabel="#{u.nome}"
+                                       itemValue="#{u}"/>
+                    </p:selectOneMenu>
+                </div>
+
+                <!-- STATUS -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Status" for="status"/>
+                    <p:selectOneMenu id="status"
+                                     value="#{reservaBean.reserva.status}"
+                                     required="true"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="" />
+                        <f:selectItems value="#{reservaBean.statusList}"
+                                       var="st"
+                                       itemLabel="#{st.nome}"
+                                       itemValue="#{st}"/>
+                    </p:selectOneMenu>
+                </div>
+
+            </div>
+
+            <p:commandButton value="Salvar"
+                             action="#{reservaBean.salvar}"
+                             update="msgs tabelaReservas"
+                             style="margin-top:15px; background:#219ebc; border:0;"/>
+        </p:panel>
+
+    </h:form>
+
+
+    <!-- LISTAGEM -->
+    <h:form id="formTabela">
+
+        <p:panel header="Lista de Reservas">
+
+            <!-- FILTROS -->
+            <div class="p-grid" style="margin-bottom:15px;">
+
+                <div class="p-col-12 p-md-2">
+                    <p:outputLabel value="Buscar por ID" for="fId"/>
+                    <p:inputText id="fId" value="#{reservaBean.filtroId}"/>
+                </div>
+
+                <div class="p-col-12 p-md-4">
+                    <p:outputLabel value="Buscar por Usuário" for="fUsuario"/>
+                    <p:inputText id="fUsuario" value="#{reservaBean.filtroUsuario}"/>
+                </div>
+
+                <div class="p-col-12 p-md-4">
+                    <p:outputLabel value="Buscar por Sala" for="fSala"/>
+                    <p:inputText id="fSala" value="#{reservaBean.filtroSala}"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Pesquisar"
+                                     action="#{reservaBean.filtrar}"
+                                     update="tabelaReservas"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+            </div>
+
+            <!-- TABELA -->
+            <p:dataTable id="tabelaReservas"
+                         value="#{reservaBean.reservas}"
+                         var="r"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="Nenhuma reserva encontrada">
+
+                <p:column headerText="ID" style="width:80px;">
+                    <h:outputText value="#{r.id}"/>
+                </p:column>
+
+                <p:column headerText="Usuário">
+                    <h:outputText value="#{r.usuario.nome}"/>
+                </p:column>
+
+                <p:column headerText="Sala">
+                    <h:outputText value="#{r.sala.nome}"/>
+                </p:column>
+
+                <p:column headerText="Início">
+                    <h:outputText value="#{r.dataHoraInicio}"/>
+                </p:column>
+
+                <p:column headerText="Término">
+                    <h:outputText value="#{r.dataHoraTermino}"/>
+                </p:column>
+
+                <p:column headerText="Status">
+                    <h:outputText value="#{r.status.nome}"/>
+                </p:column>
+
+                <p:column headerText="Ações" style="width:150px; text-align:center;">
+
+                    <p:commandButton icon="pi pi-pencil"
+                                     action="#{reservaBean.editar(r)}"
+                                     update="formReserva"
+                                     style="margin-right:8px;"/>
+
+                    <p:commandButton icon="pi pi-trash"
+                                     action="#{reservaBean.remover(r)}"
+                                     update="tabelaReservas msgs"
+                                     onclick="return confirm('Deseja realmente excluir?');"
+                                     style="color:#e63946;"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>
