@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Gerenciar Pacientes</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Pacientes</h2>
+
+    <!-- FORMULÁRIO -->
+    <h:form id="formPaciente">
+
+        <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+        <p:panel header="Cadastro de Paciente" style="margin-bottom:20px;">
+
+            <div class="p-fluid p-formgrid p-grid">
+
+                <!-- NOME -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Nome" for="nome"/>
+                    <p:inputText id="nome" value="#{pacienteBean.paciente.nome}" required="true"/>
+                </div>
+
+                <!-- NOME SOCIAL -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Nome Social" for="nomeSocial"/>
+                    <p:inputText id="nomeSocial" value="#{pacienteBean.paciente.nomeSocial}"/>
+                </div>
+
+                <!-- SEXO -->
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Sexo" for="sexo"/>
+                    <p:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}" hideNoSelectionOption="true" required="true">
+                        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Feminino" itemValue="F"/>
+                    </p:selectOneMenu>
+                </div>
+
+                <!-- DATA NASCIMENTO -->
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Data de Nascimento" for="dataNasc"/>
+                    <p:calendar id="dataNasc"
+                                value="#{pacienteBean.paciente.dataNascimento}"
+                                pattern="dd/MM/yyyy"
+                                showIcon="true"/>
+                </div>
+
+                <!-- TELEFONE -->
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Telefone" for="telefone"/>
+                    <p:inputMask id="telefone" mask="(99) 99999-9999"
+                                 value="#{pacienteBean.paciente.telefone}"/>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="E-mail" for="email"/>
+                    <p:inputText id="email" value="#{pacienteBean.paciente.email}"/>
+                </div>
+
+                <!-- CPF -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="CPF" for="cpf"/>
+                    <p:inputMask id="cpf" mask="999.999.999-99"
+                                 value="#{pacienteBean.paciente.cpf}" required="true"/>
+                </div>
+
+                <!-- RG -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="RG" for="rg"/>
+                    <p:inputText id="rg" value="#{pacienteBean.paciente.rg}"/>
+                </div>
+
+                <!-- CNS -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="CNS" for="cns"/>
+                    <p:inputText id="cns" value="#{pacienteBean.paciente.cns}"/>
+                </div>
+
+                <!-- NOME MÃE -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Nome da Mãe" for="nomeMae"/>
+                    <p:inputText id="nomeMae" value="#{pacienteBean.paciente.nomeMae}"/>
+                </div>
+
+                <!-- NOME PAI -->
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Nome do Pai" for="nomePai"/>
+                    <p:inputText id="nomePai" value="#{pacienteBean.paciente.nomePai}"/>
+                </div>
+
+                <!-- ENDEREÇO - agrupando os campos -->
+                <h3 style="margin-left:15px; color:#006d77;">Endereço</h3>
+
+                <div class="p-field p-col-12 p-md-8">
+                    <p:outputLabel value="Logradouro" for="logra"/>
+                    <p:inputText id="logra"
+                                 value="#{pacienteBean.paciente.endereco.logradouro}"
+                                 required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Número" for="numero"/>
+                    <p:inputText id="numero"
+                                 value="#{pacienteBean.paciente.endereco.numero}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Complemento" for="compl"/>
+                    <p:inputText id="compl"
+                                 value="#{pacienteBean.paciente.endereco.complemento}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Bairro" for="bairro"/>
+                    <p:inputText id="bairro"
+                                 value="#{pacienteBean.paciente.endereco.bairro}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="CEP" for="cep"/>
+                    <p:inputMask id="cep" mask="99999-999"
+                                 value="#{pacienteBean.paciente.endereco.cep}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Cidade" for="cidade"/>
+                    <p:inputText id="cidade"
+                                 value="#{pacienteBean.paciente.endereco.cidade}"
+                                 required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Estado" for="estado"/>
+                    <p:inputText id="estado" maxlength="2"
+                                 value="#{pacienteBean.paciente.endereco.estado}"
+                                 required="true"/>
+                </div>
+
+            </div>
+
+            <p:commandButton value="Salvar"
+                             action="#{pacienteBean.salvar}"
+                             update="msgs tabelaPacientes"
+                             style="margin-top:15px; background:#219ebc; border:0;" />
+
+        </p:panel>
+
+    </h:form>
+
+
+
+    <!-- LISTAGEM -->
+    <h:form id="formTabela">
+
+        <p:panel header="Lista de Pacientes">
+
+            <!-- FILTROS -->
+            <div class="p-grid" style="margin-bottom:15px;">
+
+                <div class="p-col-12 p-md-3">
+                    <p:outputLabel value="Buscar por ID" for="fId"/>
+                    <p:inputText id="fId" value="#{pacienteBean.filtroId}"/>
+                </div>
+
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel value="Buscar por Nome" for="fNome"/>
+                    <p:inputText id="fNome" value="#{pacienteBean.filtroNome}"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Pesquisar"
+                                     action="#{pacienteBean.filtrar}"
+                                     update="tabelaPacientes"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Limpar"
+                                     action="#{pacienteBean.limparFiltro}"
+                                     update="formTabela"
+                                     icon="pi pi-times"
+                                     style="background:#8d99ae; border:0;"/>
+                </div>
+
+            </div>
+
+            <!-- TABELA -->
+            <p:dataTable id="tabelaPacientes"
+                         value="#{pacienteBean.pacientes}"
+                         var="p"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="Nenhum paciente encontrado">
+
+                <p:column headerText="ID" style="width:80px;">
+                    <h:outputText value="#{p.id}"/>
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{p.nome}"/>
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{p.cpf}"/>
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{p.telefone}"/>
+                </p:column>
+
+                <p:column headerText="Cidade">
+                    <h:outputText value="#{p.endereco.cidade}"/>
+                </p:column>
+
+                <p:column headerText="Ações" style="text-align:center; width:150px;">
+
+                    <!-- EDITAR -->
+                    <p:commandButton icon="pi pi-pencil"
+                                     action="#{pacienteBean.editar(p)}"
+                                     update="formPaciente"
+                                     style="margin-right:8px;"/>
+
+                    <!-- DELETE -->
+                    <p:commandButton icon="pi pi-trash"
+                                     action="#{pacienteBean.remover(p)}"
+                                     update="tabelaPacientes msgs"
+                                     onclick="return confirm('Deseja realmente excluir?');"
+                                     style="color:#e63946;"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>
