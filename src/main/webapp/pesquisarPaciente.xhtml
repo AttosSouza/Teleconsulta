@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Gerenciar Pacientes</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Pacientes</h2>
+
+    <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+    <h:form id="formPesquisarPaciente">
+
+        <p:panel header="Lista de Pacientes">
+
+            <!-- FILTROS -->
+            <div class="p-grid" style="margin-bottom:15px;">
+
+                <div class="p-col-12 p-md-3">
+                    <p:outputLabel value="Buscar por ID" for="fId"/>
+                    <p:inputText id="fId" value="#{pacienteController.filtro.id}"/>
+                </div>
+
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel value="Buscar por Nome" for="fNome"/>
+                    <p:inputText id="fNome" value="#{pacienteController.filtro.nome}"/>
+                </div>
+
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel value="Buscar por nome social" for="fNomeSocial"/>
+                    <p:inputText id="fNomeSocial" value="#{pacienteController.filtro.nomeSocial}"/>
+                </div>
+
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel value="Buscar por CPF" for="fCPF"/>
+                    <p:inputText id="fCPF" value="#{pacienteController.filtro.cpf}"/>
+                </div>
+
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel value="Buscar por RG" for="fRG"/>
+                    <p:inputText id="fRG" value="#{pacienteController.filtro.rg}"/>
+                </div>
+
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel value="Buscar por CNS" for="fCNS"/>
+                    <p:inputText id="fCNS" value="#{pacienteController.filtro.cns}"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Pesquisar"
+                                     action="#{pacienteController.pesquisar}"
+                                     update="tabelaPacientes"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Limpar"
+                                     action="#{pacienteController.limpar}"
+                                     update="tabelaPacientes"
+                                     icon="pi pi-times"
+                                     style="background:#8d99ae; border:0;"/>
+                </div>
+
+            </div>
+
+            <!-- TABELA -->
+            <p:dataTable id="tabelaPacientes"
+                         value="#{pacienteController.pacientes}"
+                         var="p"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="Nenhum paciente encontrado">
+
+                <p:column headerText="ID" style="width:80px;">
+                    <h:outputText value="#{p.id}"/>
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{p.nome}"/>
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{p.cpf}"/>
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{p.telefone}"/>
+                </p:column>
+
+
+                <p:column headerText="Ações" style="text-align:center; width:150px;">
+
+                    <!-- EDITAR -->
+                    <p:commandButton icon="pi pi-pencil"
+                                     action="#{pacienteController.irParaEdicao(p)}"
+                                     update="tabelaPacientes"
+                                     style="margin-right:8px;"/>
+
+                    <!-- DELETE -->
+                    <p:commandButton icon="pi pi-trash"
+                                     action="#{pacienteController.remover(p)}"
+                                     update="tabelaPacientes msgs"
+                                     onclick="return confirm('Deseja realmente excluir?');"
+                                     style="color:#e63946;"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

@@ -16,6 +16,22 @@
             <redirect/>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>pesquisarPaciente</from-outcome>
+
+            <to-view-id>/pesquisarPaciente.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>cadastroPaciente</from-outcome>
+
+            <to-view-id>/cadastroPaciente.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
     </navigation-rule>
 
 </faces-config>
