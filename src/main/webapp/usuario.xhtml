@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Gerenciar Usuários</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Usuário</h2>
+
+    <!-- FORMULÁRIO DE CADASTRO -->
+    <h:form id="formUsuario">
+
+        <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+        <p:panel header="Cadastrar Usuário" style="margin-bottom:20px;">
+
+            <div class="p-fluid p-formgrid p-grid">
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel for="nome" value="Nome" />
+                    <p:inputText id="nome" value="#{usuarioBean.usuario.nome}" style="margin-left:15px;" required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel for="email" value="Email" />
+                    <p:inputText id="email" value="#{usuarioBean.usuario.email}" style="margin-left:15px;" required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel for="senha" value="Senha" />
+                    <p:password id="senha" style="margin-left:15px;" required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel for="cpf" value="CPF" />
+                    <p:inputMask mask="999.999.999-99"
+                                 id="cpf"
+                                 value="#{usuarioBean.usuario.cpf}" style="margin-left:15px;" required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel for="data" value="Data de cadastro" />
+                    <p:calendar value="#{usuarioBean.usuario.dataCadastro}"
+                                id="data"
+                                style="margin-left:15px;"
+                                pattern="dd/MM/yyyy" showIcon="true"/>
+                </div>
+
+            </div>
+
+            <p:commandButton value="Cadastrar"
+                             action="#{usuarioBean.salvar}"
+                             update="msgs tabelaUsuarios"
+                             style="margin-top:15px; background:#219ebc; border:0;" />
+
+        </p:panel>
+
+    </h:form>
+
+
+    <!-- LISTAGEM DOS USUÁRIOS -->
+    <h:form id="formTabela">
+
+        <p:panel header="Lista de Usuários">
+
+            <!-- 🔍 FILTROS SEPARADOS -->
+            <div class="p-grid" style="margin-bottom:15px;">
+
+                <!-- FILTRAR POR ID -->
+                <div class="p-col-12 p-md-3">
+                    <p:outputLabel for="buscaPorId" value="Buscar por ID" />
+                    <p:inputText id="buscaPorId" value="#{usuarioBean.filtroId}" />
+                </div>
+
+                <!-- FILTRAR POR NOME -->
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel for="buscaPorNome" value="Buscar por nome" />
+                    <p:inputText id="buscaPorNome" value="#{usuarioBean.filtroNome}" />
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Pesquisar"
+                                     update="tabelaUsuarios"
+                                     action="#{usuarioBean.filtrar}"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;" />
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Limpar"
+                                     update="formTabela"
+                                     action="#{usuarioBean.limparFiltro}"
+                                     icon="pi pi-times"
+                                     style="background:#8d99ae; border:0;" />
+                </div>
+
+            </div>
+
+            <!-- 📋 TABELA SEM FILTROS NAS COLUNAS -->
+            <p:dataTable id="tabelaUsuarios" value="#{usuarioBean.usuarios}"
+                         var="u"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="Nenhum usuário encontrado"
+                         style="margin-top:10px;">
+
+                <p:column headerText="ID" style="width:80px;">
+                    <h:outputText value="#{u.id}" />
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{u.nome}" />
+                </p:column>
+
+                <p:column headerText="E-mail">
+                    <h:outputText value="#{u.email}" />
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{u.cpf}" />
+                </p:column>
+
+                <p:column headerText="Ações" style="text-align:center; width:140px;">
+
+                    <!-- Editar -->
+                    <p:commandButton icon="pi pi-pencil"
+                                     style="margin-right:8px;"
+                                     action="#{usuarioBean.editar(u)}"
+                                     update="formUsuario" />
+
+                    <!-- Remover -->
+                    <p:commandButton icon="pi pi-trash"
+                                     style="color:#e63946;"
+                                     action="#{usuarioBean.remover(u)}"
+                                     update="tabelaUsuarios msgs"
+                                     onclick="return confirm('Deseja realmente remover?');"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>
