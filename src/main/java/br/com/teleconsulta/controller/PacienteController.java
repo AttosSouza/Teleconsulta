@@ -3,12 +3,15 @@ package br.com.teleconsulta.controller;
 import br.com.teleconsulta.model.Paciente;
 import br.com.teleconsulta.service.PacienteService;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.util.List;
+
 
 @Named
 @ViewScoped
@@ -45,16 +48,27 @@ public class PacienteController implements Serializable {
     }
 
     public void limpar() {
-        filtro = new Paciente();
+        this.filtro = new Paciente();
+        this.paciente = new Paciente();
+        this.idSelecionado = null;
         pesquisar();
     }
 
-    public void editar (Paciente paciente) {
-
+    public void salvar () {
+        boolean novoCadastro = true;
+        if(this.paciente.getId() != null) {
+            novoCadastro = false;
+        }
+        pacienteService.salvar(this.paciente);
+        if(novoCadastro) {
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente cadastrado com sucesso");
+        } else  {
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente editado com sucesso");
+        }
     }
 
     public String cancelar () {
-        this.paciente = new Paciente();
+        limpar();
         return "pesquisarPaciente?faces-redirect=true";
     }
 
@@ -62,8 +76,20 @@ public class PacienteController implements Serializable {
         return "cadastroPaciente?faces-redirect=true&id=" + paciente.getId();
     }
 
+    public String irParaCadastro () {
+        this.limpar();
+        return "cadastroPaciente?faces-redirect=true";
+    }
+
+
     public void remover(Paciente paciente) {
-       // pacienteService.remover(paciente);
+        pacienteService.remover(paciente);
+        pesquisar();
+        addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente removido com sucesso");
+    }
+
+    private void addMessage(FacesMessage.Severity severityInfo, String titulo, String descricao) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severityInfo, titulo, descricao));
     }
 
     public Paciente getFiltro() {

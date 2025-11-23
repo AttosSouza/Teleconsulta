@@ -25,4 +25,8 @@ public class PacienteService implements Serializable {
     public Paciente buscarPacientePorId(Long id) {
         return pacienteRepository.buscarPorId(id);
     }
+
+    public void remover(Paciente paciente) {
+        pacienteRepository.remover(paciente.getId());
+    }
 }

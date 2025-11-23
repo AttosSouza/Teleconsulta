@@ -15,6 +15,12 @@
         <finalName>teleconsulta</finalName>
     </build>
 
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
         <!-- API de Servlets usada pelo Tomcat (fornecida pelo servidor) -->
         <dependency>

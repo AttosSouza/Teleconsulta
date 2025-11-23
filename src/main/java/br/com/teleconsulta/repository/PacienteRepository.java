@@ -2,7 +2,6 @@ package br.com.teleconsulta.repository;
 
 import br.com.teleconsulta.core.Repository;
 import br.com.teleconsulta.model.Paciente;
-import com.jetbrains.cef.remote.thrift.utils.StringUtils;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -36,46 +35,46 @@ public class PacienteRepository extends Repository<Paciente, Long> implements Se
 
         StringBuilder jpql = new StringBuilder("SELECT p FROM Paciente p WHERE 1=1");
 
-        if (paciente.getNome() != null) {
+        if (paciente.getNome() != null && !paciente.getNome().trim().isBlank()) {
             jpql.append(" AND UPPER(p.nome) LIKE :nome");
         }
 
-        if (paciente.getNomeSocial() != null) {
+        if (paciente.getNomeSocial() != null && !paciente.getNomeSocial().trim().isBlank()) {
             jpql.append(" AND UPPER(p.nomeSocial) LIKE :nome_social");
         }
 
-        if (paciente.getCpf() != null ) {
+        if (paciente.getCpf() != null && !paciente.getCpf().trim().isBlank()) {
             jpql.append(" AND p.cpf = :cpf");
         }
 
-        if (paciente.getRg() != null) {
+        if (paciente.getRg() != null && !paciente.getRg().trim().isBlank()) {
             jpql.append(" AND UPPER(p.rg) = :rg");
         }
 
-        if (paciente.getCns() != null ) {
+        if (paciente.getCns() != null && !paciente.getCns().trim().isBlank()) {
             jpql.append(" AND UPPER(p.cns) = :cns");
         }
 
         TypedQuery<Paciente> query =
                 entityManager.createQuery(jpql.toString(), Paciente.class);
 
-        if (paciente.getNome() != null) {
+        if (paciente.getNome() != null && !paciente.getNome().trim().isBlank()) {
             query.setParameter("nome", "%" + paciente.getNome().toUpperCase() + "%");
         }
 
-        if (paciente.getNomeSocial() != null) {
+        if (paciente.getNomeSocial() != null && !paciente.getNomeSocial().trim().isBlank()) {
             query.setParameter("nome_social", "%" + paciente.getNomeSocial().toUpperCase() + "%");
         }
 
-        if (paciente.getCpf() != null) {
+        if (paciente.getCpf() != null && !paciente.getCpf().trim().isBlank()) {
             query.setParameter("cpf", paciente.getCpf());
         }
 
-        if (paciente.getRg() != null) {
+        if (paciente.getRg() != null && !paciente.getRg().trim().isBlank()) {
             query.setParameter("rg", paciente.getRg().toUpperCase());
         }
 
-        if (paciente.getCns() != null) {
+        if (paciente.getCns() != null && !paciente.getCns().trim().isBlank()) {
             query.setParameter("cns", paciente.getCns().toUpperCase());
         }
 

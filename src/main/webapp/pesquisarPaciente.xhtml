@@ -19,6 +19,7 @@
         <p:panel header="Lista de Pacientes">
 
             <!-- FILTROS -->
+            <p:outputPanel id="filtrosPesquisarPacientes">
             <div class="p-grid" style="margin-bottom:15px;">
 
                 <div class="p-col-12 p-md-3">
@@ -60,15 +61,24 @@
                 </div>
 
                 <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Novo cadastro"
+                                     action="#{pacienteController.irParaCadastro}"
+                                     process="@this"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
                     <p:commandButton value="Limpar"
                                      action="#{pacienteController.limpar}"
-                                     update="tabelaPacientes"
+                                     process="@this"
+                                     update="filtrosPesquisarPacientes tabelaPacientes"
                                      icon="pi pi-times"
                                      style="background:#8d99ae; border:0;"/>
                 </div>
 
             </div>
-
+            </p:outputPanel>
             <!-- TABELA -->
             <p:dataTable id="tabelaPacientes"
                          value="#{pacienteController.pacientes}"

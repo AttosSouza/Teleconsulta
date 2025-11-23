@@ -1,11 +1,9 @@
 package br.com.teleconsulta.core;
 
-import br.com.teleconsulta.model.Paciente;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jogamp.graph.font.typecast.ot.table.ID;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -49,10 +47,6 @@ public abstract class Repository<E, ID> implements Serializable {
                 entityManager.getTransaction().rollback();
             }
             throw e;
-        } finally {
-            if(entityManager.isOpen()) {
-                entityManager.close();
-            }
         }
     }
 
@@ -72,10 +66,6 @@ public abstract class Repository<E, ID> implements Serializable {
                 entityManager.getTransaction().rollback();
             }
             throw e;
-        } finally {
-            if(entityManager.isOpen()) {
-                entityManager.close();
-            }
         }
     }
 }
