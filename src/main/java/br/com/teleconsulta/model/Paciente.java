@@ -47,7 +47,7 @@ public class Paciente implements Serializable {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;
 

@@ -18,7 +18,6 @@
 
         <p:panel header="Lista de Pacientes">
 
-            <!-- FILTROS -->
             <p:outputPanel id="filtrosPesquisarPacientes">
             <div class="p-grid" style="margin-bottom:15px;">
 
@@ -79,7 +78,7 @@
 
             </div>
             </p:outputPanel>
-            <!-- TABELA -->
+
             <p:dataTable id="tabelaPacientes"
                          value="#{pacienteController.pacientes}"
                          var="p"
@@ -106,13 +105,11 @@
 
                 <p:column headerText="Ações" style="text-align:center; width:150px;">
 
-                    <!-- EDITAR -->
                     <p:commandButton icon="pi pi-pencil"
                                      action="#{pacienteController.irParaEdicao(p)}"
                                      update="tabelaPacientes"
                                      style="margin-right:8px;"/>
 
-                    <!-- DELETE -->
                     <p:commandButton icon="pi pi-trash"
                                      action="#{pacienteController.remover(p)}"
                                      update="tabelaPacientes msgs"

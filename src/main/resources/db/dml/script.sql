@@ -85,3 +85,16 @@ INSERT INTO reserva (
 (8, '2025-01-08 15:00', '2025-01-08 16:00', 8, 8, 4, NULL, NULL, NULL),
 (9, '2025-01-09 09:30', '2025-01-09 10:30', 9, 9, 3, 9, 'Cancelado por conflito de agenda', '2025-01-09 09:00'),
 (10, '2025-01-10 17:00', '2025-01-10 18:00', 10, 10, 2, NULL, NULL, NULL);
+
+
+SELECT setval('endereco_id_seq', (SELECT MAX(id) FROM endereco));
+
+SELECT setval('paciente_id_seq', (SELECT MAX(id) FROM paciente));
+
+SELECT setval('usuario_id_seq', (SELECT MAX(id) FROM usuario));
+
+SELECT setval('unidade_saude_id_seq', (SELECT MAX(id) FROM unidade_saude));
+
+SELECT setval('sala_id_seq', (SELECT MAX(id) FROM sala));
+
+SELECT setval('reserva_id_seq', (SELECT MAX(id) FROM reserva));

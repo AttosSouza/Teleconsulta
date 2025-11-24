@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+    <f:viewParam name="id" value="#{usuarioController.idSelecionado}" />
+    <f:viewAction action="#{usuarioController.inicializarFormulario}" />
+</f:metadata>
+
+<h:head>
+    <title>Gerenciar Usuarios</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de usuarios</h2>
+
+    <h:form id="formCadastroUsuario">
+
+        <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+        <p:panel header="Cadastro de Usuario" style="margin-bottom:20px;">
+
+            <div class="p-fluid p-formgrid p-grid">
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Nome" for="nome"/>
+                    <p:inputText id="nome" value="#{usuarioController.usuario.nome}" required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="E-mail" for="email"/>
+                    <p:inputText id="email" value="#{usuarioController.usuario.email}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel for="senha" value="Senha" />
+                    <p:password id="senha" style="margin-left:15px;" value="#{usuarioController.usuario.senha}" required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="CPF" for="cpf"/>
+                    <p:inputMask id="cpf" mask="999.999.999-99"
+                                 value="#{usuarioController.usuario.cpf}" required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Data de Cadastro" for="dataCad"/>
+                    <p:calendar id="dataCad"
+                                value="#{usuarioController.usuario.dataCadastro}"
+                                pattern="dd/MM/yyyy"
+                                showIcon="true"/>
+                </div>
+
+            </div>
+
+            <p:commandButton value="Salvar"
+                             action="#{usuarioController.salvar}"
+                             update="msgs formCadastroUsuario"
+                             style="margin-top:15px; background:#219ebc; border:0;" />
+
+            <p:commandButton value="Voltar"
+                             action="#{usuarioController.cancelar}"
+                             style="margin-top:15px; background:#219ebc; border:0;" />
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

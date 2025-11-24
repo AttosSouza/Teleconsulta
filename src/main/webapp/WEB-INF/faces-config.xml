@@ -17,6 +17,22 @@
         </navigation-case>
 
         <navigation-case>
+            <from-outcome>pesquisarUsuario</from-outcome>
+
+            <to-view-id>/pesquisarUsuario.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>cadastroUsuario</from-outcome>
+
+            <to-view-id>/cadastroUsuario.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
             <from-outcome>pesquisarPaciente</from-outcome>
 
             <to-view-id>/pesquisarPaciente.xhtml</to-view-id>

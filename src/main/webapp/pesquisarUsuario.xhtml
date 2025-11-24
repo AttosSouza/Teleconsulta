@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Gerenciar Usuários</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Usuário</h2>
+
+    <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+    <h:form id="formPesquisarUsuario">
+
+        <p:panel header="Lista de Usuários">
+
+            <p:outputPanel id="filtrosPesquisarUsuarios">
+            <div class="p-grid" style="margin-bottom:15px;">
+
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel for="fNome" value="Buscar por nome" />
+                    <p:inputText id="fNome" value="#{usuarioController.filtro.nome}" />
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Pesquisar"
+                                     update="tabelaUsuarios"
+                                     action="#{usuarioController.pesquisar}"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;" />
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Novo cadastro"
+                                     action="#{usuarioController.irParaCadastro}"
+                                     process="@this"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Limpar"
+                                     update="filtrosPesquisarUsuarios tabelaUsuarios"
+                                     process="@this"
+                                     action="#{usuarioController.limpar}"
+                                     icon="pi pi-times"
+                                     style="background:#8d99ae; border:0;" />
+                </div>
+
+            </div>
+            </p:outputPanel>
+
+            <p:dataTable id="tabelaUsuarios"
+                         value="#{usuarioController.usuarios}"
+                         var="u"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="Nenhum usuário encontrado"
+                         style="margin-top:10px;">
+
+                <p:column headerText="ID" style="width:80px;">
+                    <h:outputText value="#{u.id}" />
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{u.nome}" />
+                </p:column>
+
+                <p:column headerText="E-mail">
+                    <h:outputText value="#{u.email}" />
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{u.cpf}" />
+                </p:column>
+
+                <p:column headerText="Ações" style="text-align:center; width:140px;">
+
+                    <p:commandButton icon="pi pi-pencil"
+                                     style="margin-right:8px;"
+                                     action="#{usuarioController.irParaEdicao(u)}"
+                                     update="tabelaUsuarios" />
+
+                    <p:commandButton icon="pi pi-trash"
+                                     style="color:#e63946;"
+                                     action="#{usuarioController.remover(u)}"
+                                     update="tabelaUsuarios msgs"
+                                     onclick="return confirm('Deseja realmente remover?');"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

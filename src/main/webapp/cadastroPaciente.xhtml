@@ -16,7 +16,6 @@
 
     <h2 style="color:#006d77;">Gerenciamento de Pacientes</h2>
 
-    <!-- FORMULÁRIO -->
     <h:form id="formCadastroPaciente">
 
         <p:messages id="msgs" autoUpdate="true" closable="true"/>
@@ -25,19 +24,16 @@
 
             <div class="p-fluid p-formgrid p-grid">
 
-                <!-- NOME -->
                 <div class="p-field p-col-12 p-md-6">
                     <p:outputLabel value="Nome" for="nome"/>
                     <p:inputText id="nome" value="#{pacienteController.paciente.nome}" required="true"/>
                 </div>
 
-                <!-- NOME SOCIAL -->
                 <div class="p-field p-col-12 p-md-6">
                     <p:outputLabel value="Nome Social" for="nomeSocial"/>
                     <p:inputText id="nomeSocial" value="#{pacienteController.paciente.nomeSocial}"/>
                 </div>
 
-                <!-- SEXO -->
                 <div class="p-field p-col-12 p-md-4">
                     <p:outputLabel value="Sexo" for="sexo"/>
                     <p:selectOneMenu id="sexo" value="#{pacienteController.paciente.sexo}" hideNoSelectionOption="true" required="true">
@@ -47,7 +43,6 @@
                     </p:selectOneMenu>
                 </div>
 
-                <!-- DATA NASCIMENTO -->
                 <div class="p-field p-col-12 p-md-4">
                     <p:outputLabel value="Data de Nascimento" for="dataNasc"/>
                     <p:calendar id="dataNasc"
@@ -56,51 +51,43 @@
                                 showIcon="true"/>
                 </div>
 
-                <!-- TELEFONE -->
                 <div class="p-field p-col-12 p-md-4">
                     <p:outputLabel value="Telefone" for="telefone"/>
                     <p:inputMask id="telefone" mask="(99) 99999-9999"
                                  value="#{pacienteController.paciente.telefone}"/>
                 </div>
 
-                <!-- EMAIL -->
                 <div class="p-field p-col-12 p-md-6">
                     <p:outputLabel value="E-mail" for="email"/>
                     <p:inputText id="email" value="#{pacienteController.paciente.email}"/>
                 </div>
 
-                <!-- CPF -->
                 <div class="p-field p-col-12 p-md-6">
                     <p:outputLabel value="CPF" for="cpf"/>
                     <p:inputMask id="cpf" mask="999.999.999-99"
                                  value="#{pacienteController.paciente.cpf}" required="true"/>
                 </div>
 
-                <!-- RG -->
                 <div class="p-field p-col-12 p-md-6">
                     <p:outputLabel value="RG" for="rg"/>
                     <p:inputText id="rg" value="#{pacienteController.paciente.rg}"/>
                 </div>
 
-                <!-- CNS -->
                 <div class="p-field p-col-12 p-md-6">
                     <p:outputLabel value="CNS" for="cns"/>
                     <p:inputText id="cns" value="#{pacienteController.paciente.cns}"/>
                 </div>
 
-                <!-- NOME MÃE -->
                 <div class="p-field p-col-12 p-md-6">
                     <p:outputLabel value="Nome da Mãe" for="nomeMae"/>
                     <p:inputText id="nomeMae" value="#{pacienteController.paciente.nomeMae}"/>
                 </div>
 
-                <!-- NOME PAI -->
                 <div class="p-field p-col-12 p-md-6">
                     <p:outputLabel value="Nome do Pai" for="nomePai"/>
                     <p:inputText id="nomePai" value="#{pacienteController.paciente.nomePai}"/>
                 </div>
 
-                <!-- ENDEREÇO - agrupando os campos -->
                 <h3 style="margin-left:15px; color:#006d77;">Endereço</h3>
 
                 <div class="p-field p-col-12 p-md-8">

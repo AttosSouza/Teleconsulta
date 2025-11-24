@@ -1,5 +1,7 @@
 package br.com.teleconsulta.controller;
 
+import br.com.teleconsulta.core.Controller;
+import br.com.teleconsulta.model.Endereco;
 import br.com.teleconsulta.model.Paciente;
 import br.com.teleconsulta.service.PacienteService;
 import jakarta.annotation.PostConstruct;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
-public class PacienteController implements Serializable {
+public class PacienteController extends Controller implements Serializable {
 
     @Inject
     private PacienteService pacienteService;
@@ -32,7 +34,7 @@ public class PacienteController implements Serializable {
     public void init() {
         filtro = new Paciente();
         pesquisar();
-        if(paciente != null) {
+        if(paciente == null) {
             paciente = new Paciente();
         }
     }
@@ -40,6 +42,9 @@ public class PacienteController implements Serializable {
     public void inicializarFormulario () {
         if(idSelecionado != null) {
             this.paciente = pacienteService.buscarPacientePorId(idSelecionado);
+        } else {
+            this.paciente = new Paciente();
+            this.paciente.setEndereco(new Endereco());
         }
     }
 
@@ -81,15 +86,10 @@ public class PacienteController implements Serializable {
         return "cadastroPaciente?faces-redirect=true";
     }
 
-
     public void remover(Paciente paciente) {
         pacienteService.remover(paciente);
         pesquisar();
         addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente removido com sucesso");
-    }
-
-    private void addMessage(FacesMessage.Severity severityInfo, String titulo, String descricao) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severityInfo, titulo, descricao));
     }
 
     public Paciente getFiltro() {
