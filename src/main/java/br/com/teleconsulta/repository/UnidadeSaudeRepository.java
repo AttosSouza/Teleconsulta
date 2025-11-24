@@ -38,4 +38,10 @@ public class UnidadeSaudeRepository extends Repository<UnidadeSaude, Long> imple
         return query.getResultList();
     }
 
+    public List<UnidadeSaude> listarTodos() {
+        return entityManager
+                .createQuery("SELECT u FROM UnidadeSaude u ORDER BY u.nome", UnidadeSaude.class)
+                .getResultList();
+    }
+
 }

@@ -56,11 +56,26 @@
             <redirect/>
         </navigation-case>
 
-
         <navigation-case>
             <from-outcome>cadastroUnidadeSaude</from-outcome>
 
             <to-view-id>/cadastroUnidadeSaude.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>pesquisarSala</from-outcome>
+
+            <to-view-id>/pesquisarSala.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>cadastroSala</from-outcome>
+
+            <to-view-id>/cadastroSala.xhtml</to-view-id>
 
             <redirect/>
         </navigation-case>

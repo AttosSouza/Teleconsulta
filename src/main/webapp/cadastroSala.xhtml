@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+    <f:viewParam name="id" value="#{salaController.idSelecionado}" />
+    <f:viewAction action="#{salaController.inicializarFormulario}" />
+</f:metadata>
+
+<h:head>
+    <title>Gerenciar Salas</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Salas</h2>
+
+    <h:form id="formCadastroSala">
+
+        <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+        <p:panel header="Cadastro de Sala" style="margin-bottom:20px;">
+
+            <div class="p-fluid p-formgrid p-grid">
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Nome da Sala" for="nome"/>
+                    <p:inputText id="nome"
+                                 value="#{salaController.sala.nome}"
+                                 required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-3">
+                    <p:outputLabel value="Capacidade" for="capacidade"/>
+                    <p:inputNumber id="capacidade"
+                                   value="#{salaController.sala.capacidade}"
+                                   required="true"
+                                   minValue="1"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Unidade de Saúde" for="unid"/>
+                    <p:selectOneMenu id="unid"
+                                     value="#{salaController.sala.unidadeSaude}"
+                                     converter="unidadeSaudeConverter"
+                                     required="true"
+                                     filter="true"
+                                     filterMatchMode="contains">
+
+                        <f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+
+                        <f:selectItems value="#{salaController.unidades}"
+                                       var="u"
+                                       itemLabel="#{u.nome}"
+                                       itemValue="#{u}"/>
+                    </p:selectOneMenu>
+                </div>
+
+            </div>
+
+            <p:commandButton value="Salvar"
+                             action="#{salaController.salvar}"
+                             update="msgs formCadastroSala"
+                             style="margin-top:15px; background:#219ebc; border:0;"/>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

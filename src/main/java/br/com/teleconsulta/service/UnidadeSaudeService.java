@@ -31,4 +31,8 @@ public class UnidadeSaudeService implements Serializable {
     public void remover(UnidadeSaude unidadeSaude) {
         unidadeSaudeRepository.remover(unidadeSaude.getId());
     }
+
+    public List<UnidadeSaude> listarTodos() {
+        return unidadeSaudeRepository.listarTodos();
+    }
 }
