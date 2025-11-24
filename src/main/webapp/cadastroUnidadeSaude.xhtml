@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+    <f:viewParam name="id" value="#{unidadeSaudeController.idSelecionado}" />
+    <f:viewAction action="#{unidadeSaudeController.inicializarFormulario}" />
+</f:metadata>
+
+<h:head>
+    <title>Gerenciar Unidades de Saúde</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Unidades de Saúde</h2>
+
+    <h:form id="formCadastroUnidadeSaude">
+
+        <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+        <p:panel header="Cadastro de Unidade de Saúde" style="margin-bottom:20px;">
+
+            <div class="p-fluid p-formgrid p-grid">
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Nome" for="nome"/>
+                    <p:inputText id="nome" value="#{unidadeSaudeController.unidadeSaude.nome}" required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Razão Social" for="razao"/>
+                    <p:inputText id="razao" value="#{unidadeSaudeController.unidadeSaude.razaoSocial}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-3">
+                    <p:outputLabel value="Sigla" for="sigla"/>
+                    <p:inputText id="sigla" value="#{unidadeSaudeController.unidadeSaude.sigla}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="CNPJ" for="cnpj"/>
+                    <p:inputMask id="cnpj"
+                                 mask="99.999.999/9999-99"
+                                 value="#{unidadeSaudeController.unidadeSaude.cnpj}"
+                                 required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-5">
+                    <p:outputLabel value="CNES" for="cnes"/>
+                    <p:inputText id="cnes" value="#{unidadeSaudeController.unidadeSaude.cnes}"/>
+                </div>
+
+                <h3 style="margin-left:15px; color:#006d77;">Endereço</h3>
+
+                <div class="p-field p-col-12 p-md-8">
+                    <p:outputLabel value="Logradouro" for="logra"/>
+                    <p:inputText id="logra"
+                                 value="#{unidadeSaudeController.unidadeSaude.endereco.logradouro}"
+                                 required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Número" for="numero"/>
+                    <p:inputText id="numero"
+                                 value="#{unidadeSaudeController.unidadeSaude.endereco.numero}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Complemento" for="compl"/>
+                    <p:inputText id="compl"
+                                 value="#{unidadeSaudeController.unidadeSaude.endereco.complemento}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="Bairro" for="bairro"/>
+                    <p:inputText id="bairro"
+                                 value="#{unidadeSaudeController.unidadeSaude.endereco.bairro}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p:outputLabel value="CEP" for="cep"/>
+                    <p:inputMask id="cep" mask="99999-999"
+                                 value="#{unidadeSaudeController.unidadeSaude.endereco.cep}"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Cidade" for="cidade"/>
+                    <p:inputText id="cidade"
+                                 value="#{unidadeSaudeController.unidadeSaude.endereco.cidade}"
+                                 required="true"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Estado" for="estado"/>
+                    <p:inputText id="estado" maxlength="2"
+                                 value="#{unidadeSaudeController.unidadeSaude.endereco.estado}"
+                                 required="true"/>
+                </div>
+
+            </div>
+
+            <p:commandButton value="Salvar"
+                             action="#{unidadeSaudeController.salvar}"
+                             update="msgs formCadastroUnidadeSaude"
+                             style="margin-top:15px; background:#219ebc; border:0;" />
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

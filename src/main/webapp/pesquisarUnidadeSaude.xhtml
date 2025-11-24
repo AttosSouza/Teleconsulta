@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Gerenciar Unidades de Saúde</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Unidades de Saúde</h2>
+
+    <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+    <h:form id="formPesquisarUnidadeSaude">
+
+        <p:panel header="Lista de Unidades de Saúde">
+
+            <p:outputPanel id="filtrosPesquisarUnidadeSaude">
+            <div class="p-grid" style="margin-bottom:15px;">
+
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel value="Buscar por Nome" for="fNome"/>
+                    <p:inputText id="fNome" value="#{unidadeSaudeController.filtro.nome}"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Pesquisar"
+                                     action="#{unidadeSaudeController.pesquisar}"
+                                     update="tabelaUnidades"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Novo cadastro"
+                                     action="#{unidadeSaudeController.irParaCadastro}"
+                                     process="@this"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Limpar"
+                                     action="#{unidadeSaudeController.limpar}"
+                                     update="filtrosPesquisarUnidadeSaude tabelaUnidades"
+                                     icon="pi pi-times"
+                                     style="background:#8d99ae; border:0;"/>
+                </div>
+
+            </div>
+            </p:outputPanel>
+
+            <p:dataTable id="tabelaUnidades"
+                         value="#{unidadeSaudeController.unidadeSaudes}"
+                         var="u"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="Nenhuma unidade encontrada">
+
+                <p:column headerText="ID" style="width:80px;">
+                    <h:outputText value="#{u.id}"/>
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{u.nome}"/>
+                </p:column>
+
+                <p:column headerText="Sigla">
+                    <h:outputText value="#{u.sigla}"/>
+                </p:column>
+
+                <p:column headerText="CNPJ">
+                    <h:outputText value="#{u.cnpj}"/>
+                </p:column>
+
+                <p:column headerText="CNES">
+                    <h:outputText value="#{u.cnes}"/>
+                </p:column>
+
+                <p:column headerText="Cidade">
+                    <h:outputText value="#{u.endereco.cidade}"/>
+                </p:column>
+
+                <p:column headerText="Ações" style="width:150px; text-align:center;">
+
+                    <p:commandButton icon="pi pi-pencil"
+                                     action="#{unidadeSaudeController.irParaEdicao(u)}"
+                                     update="tabelaUnidades"
+                                     style="margin-right:8px;"/>
+
+                    <p:commandButton icon="pi pi-trash"
+                                     action="#{unidadeSaudeController.remover(u)}"
+                                     update="tabelaUnidades msgs"
+                                     onclick="return confirm('Deseja realmente excluir?');"
+                                     style="color:#e63946;"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

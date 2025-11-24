@@ -48,6 +48,23 @@
             <redirect/>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>pesquisarUnidadeSaude</from-outcome>
+
+            <to-view-id>/pesquisarUnidadeSaude.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
+
+        <navigation-case>
+            <from-outcome>cadastroUnidadeSaude</from-outcome>
+
+            <to-view-id>/cadastroUnidadeSaude.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
     </navigation-rule>
 
 </faces-config>

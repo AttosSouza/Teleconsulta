@@ -28,7 +28,7 @@ public class UnidadeSaude implements Serializable {
     @Column(name = "cnes", length = 15)
     private String cnes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;
 
