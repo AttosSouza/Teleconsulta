@@ -16,47 +16,19 @@
 
     <h:form id="formPesquisarSalas">
 
-        <p:panel header="Salas Disponíveis">
+        <p:panel header="Lista de Salas">
 
             <p:outputPanel id="filtrosPesquisarSalas">
             <div class="p-grid" style="margin-bottom:15px;">
 
-                <div class="p-col-12 p-md-4">
-                    <p:outputLabel value="Unidade de Saúde" for="fUnid"/>
-                    <p:selectOneMenu id="fUnid"
-                                     value="#{salaController.filtroUnidadeSaude}"
-                                     converter="unidadeSaudeConverter"
-                                     filter="true"
-                                     filterMatchMode="contains">
-
-                        <f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-
-                        <f:selectItems value="#{salaController.unidades}"
-                                       var="u"
-                                       itemLabel="#{u.nome}"
-                                       itemValue="#{u}"/>
-                    </p:selectOneMenu>
-                </div>
-
-                <div class="p-col-12 p-md-3">
-                    <p:outputLabel value="Data/Hora Início" for="fInicio"/>
-                    <p:datePicker id="fInicio"
-                                  value="#{salaController.filtroInicio}"
-                                  showTime="true"
-                                  pattern="dd/MM/yyyy HH:mm"/>
-                </div>
-
-                <div class="p-col-12 p-md-3">
-                    <p:outputLabel value="Data/Hora Fim" for="fFim"/>
-                    <p:datePicker id="fFim"
-                                  value="#{salaController.filtroFim}"
-                                  showTime="true"
-                                  pattern="dd/MM/yyyy HH:mm"/>
+                <div class="p-col-12 p-md-5">
+                    <p:outputLabel value="Buscar por Nome" for="fNome"/>
+                    <p:inputText id="fNome" value="#{salaController.filtro.nome}"/>
                 </div>
 
                 <div class="p-col-12 p-md-2" style="margin-top:22px;">
                     <p:commandButton value="Pesquisar"
-                                     action="#{salaController.buscarSalasDisponiveis}"
+                                     action="#{salaController.pesquisar}"
                                      update="tabelaSalas"
                                      icon="pi pi-search"
                                      style="background:#219ebc; border:0;"/>
@@ -83,7 +55,7 @@
             </p:outputPanel>
 
             <p:dataTable id="tabelaSalas"
-                         value="#{salaController.salasDisponiveis}"
+                         value="#{salaController.salas}"
                          var="s"
                          paginator="true"
                          rows="10"

@@ -1,11 +1,8 @@
 package br.com.teleconsulta.controller;
 
 import br.com.teleconsulta.core.Controller;
-import br.com.teleconsulta.model.Endereco;
-import br.com.teleconsulta.model.Paciente;
 import br.com.teleconsulta.model.Sala;
 import br.com.teleconsulta.model.UnidadeSaude;
-import br.com.teleconsulta.service.PacienteService;
 import br.com.teleconsulta.service.SalaService;
 import br.com.teleconsulta.service.UnidadeSaudeService;
 import jakarta.annotation.PostConstruct;
@@ -15,7 +12,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Named
@@ -36,13 +32,6 @@ public class SalaController extends Controller implements Serializable {
     private Sala sala;
 
     private Long idSelecionado;
-
-    private UnidadeSaude filtroUnidadeSaude;
-    private LocalDateTime filtroInicio;
-    private LocalDateTime filtroFim;
-
-    private List<Sala> salasDisponiveis;
-
 
     @PostConstruct
     public void init() {
@@ -107,15 +96,6 @@ public class SalaController extends Controller implements Serializable {
         addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente removido com sucesso");
     }
 
-    public void buscarSalasDisponiveis() {
-        salasDisponiveis = salaService.buscarSalasDisponiveis(
-                filtroUnidadeSaude,
-                filtroInicio,
-                filtroFim
-        );
-    }
-
-
     public Sala getFiltro() {
         return filtro;
     }
@@ -152,35 +132,4 @@ public class SalaController extends Controller implements Serializable {
         return unidades;
     }
 
-    public UnidadeSaude getFiltroUnidadeSaude() {
-        return filtroUnidadeSaude;
-    }
-
-    public void setFiltroUnidadeSaude(UnidadeSaude filtroUnidadeSaude) {
-        this.filtroUnidadeSaude = filtroUnidadeSaude;
-    }
-
-    public LocalDateTime getFiltroInicio() {
-        return filtroInicio;
-    }
-
-    public void setFiltroInicio(LocalDateTime filtroInicio) {
-        this.filtroInicio = filtroInicio;
-    }
-
-    public LocalDateTime getFiltroFim() {
-        return filtroFim;
-    }
-
-    public void setFiltroFim(LocalDateTime filtroFim) {
-        this.filtroFim = filtroFim;
-    }
-
-    public List<Sala> getSalasDisponiveis() {
-        return salasDisponiveis;
-    }
-
-    public void setSalasDisponiveis(List<Sala> salasDisponiveis) {
-        this.salasDisponiveis = salasDisponiveis;
-    }
 }
