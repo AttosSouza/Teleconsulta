@@ -84,3 +84,29 @@
 * [ ] **9.2.3. Validar campo *email* do usuário (não pode ser nulo)**
 * [ ] **9.2.4. Validar campo *CPF* do usuário (CPF válido)**
 * [ ] **9.2.5. Validar campo *CPF* do usuário (não pode ser nulo)**
+
+#  Como Rodar com Docker
+
+O projeto já está totalmente configurado para rodar via Docker.
+
+### 1. **Gerar a imagem + build do projeto**
+Sempre que você alterar arquivos que influenciam o ambiente Docker (como Dockerfile, pom.xml, dependências), execute:
+
+
+docker compose build
+
+Ou simplesmente:
+
+docker compose up --build
+
+Após o build inicial, você pode subir apenas com:
+
+docker compose up
+
+###  Acessar a aplicação
+
+O projeto roda na porta:
+
+**http://localhost:8080/teleconsulta**
+
+Credenciais estão definidas no arquivo `docker-compose.yml`.
