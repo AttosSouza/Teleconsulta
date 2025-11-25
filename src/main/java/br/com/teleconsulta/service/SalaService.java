@@ -38,4 +38,8 @@ public class SalaService implements Serializable {
         return salaRepository.buscarSalasDisponiveis(unidade, inicio, fim);
     }
 
+    public List<Sala> listarTodos() {
+        return salaRepository.listarTodos();
+    }
+
 }

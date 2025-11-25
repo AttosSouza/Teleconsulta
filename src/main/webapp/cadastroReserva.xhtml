@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{reservaController.idSelecionado}" />
+    <f:viewAction action="#{reservaController.inicializarFormulario}" />
+</f:metadata>
+
+<h:head>
+    <title>Gerenciar Reservas</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Reservas</h2>
+
+    <h:form id="formCadastroReserva">
+
+        <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+        <p:panel header="Cadastro de Reserva" style="margin-bottom:20px;">
+
+            <div class="p-fluid p-formgrid p-grid">
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Data/Hora de Início" for="inicio"/>
+                    <p:datePicker id="inicio"
+                                  value="#{reservaController.reserva.dataHoraInicio}"
+                                  showTime="true"
+                                  hourFormat="24"
+                                  required="true"
+                                  style="width:100%"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Data/Hora de Término" for="fim"/>
+                    <p:datePicker id="fim"
+                                  value="#{reservaController.reserva.dataHoraTermino}"
+                                  showTime="true"
+                                  hourFormat="24"
+                                  required="true"
+                                  style="width:100%"/>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Sala" for="sala"/>
+                    <p:selectOneMenu id="sala"
+                                     value="#{reservaController.reserva.sala}"
+                                     converter="salaConverter"
+                                     required="true"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                        <f:selectItems value="#{reservaController.salas}"
+                                       var="s"
+                                       itemLabel="#{s.nome}"
+                                       itemValue="#{s}"/>
+                    </p:selectOneMenu>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Usuário" for="usuario"/>
+                    <p:selectOneMenu id="usuario"
+                                     converter="usuarioConverter"
+                                     value="#{reservaController.reserva.usuario}"
+                                     required="true"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                        <f:selectItems value="#{reservaController.usuarios}"
+                                       var="u"
+                                       itemLabel="#{u.nome}"
+                                       itemValue="#{u}"/>
+                    </p:selectOneMenu>
+                </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <p:outputLabel value="Status" for="status"/>
+                    <p:selectOneMenu id="status"
+                                     value="#{reservaController.reserva.status}"
+                                     converter="statusReservaConverter"
+                                     required="true"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                        <f:selectItems value="#{reservaController.statusList}"
+                                       var="st"
+                                       itemLabel="#{st.nome}"
+                                       itemValue="#{st}"/>
+                    </p:selectOneMenu>
+                </div>
+
+            </div>
+
+            <p:commandButton value="Salvar"
+                             action="#{reservaController.salvar}"
+                             update="msgs tabelaReservas"
+                             style="margin-top:15px; background:#219ebc; border:0;"/>
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>

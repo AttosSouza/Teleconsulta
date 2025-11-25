@@ -45,4 +45,10 @@ public class UsuarioRepository extends Repository<Usuario, Long> implements Seri
         return query.getResultList();
     }
 
+    public List<Usuario> listarTodos() {
+        return entityManager
+                .createQuery("SELECT u FROM Usuario u ORDER BY u.nome", Usuario.class)
+                .getResultList();
+    }
+
 }

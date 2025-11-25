@@ -77,6 +77,12 @@ public class SalaRepository extends Repository<Sala, Long> implements Serializab
         return query.getResultList();
     }
 
+    public List<Sala> listarTodos() {
+        return entityManager
+                .createQuery("SELECT s FROM Sala s ORDER BY s.nome", Sala.class)
+                .getResultList();
+    }
+
 
 
 }

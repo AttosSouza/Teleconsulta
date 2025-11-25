@@ -80,6 +80,14 @@
             <redirect/>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>cadastroReserva</from-outcome>
+
+            <to-view-id>/cadastroReserva.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
     </navigation-rule>
 
 </faces-config>

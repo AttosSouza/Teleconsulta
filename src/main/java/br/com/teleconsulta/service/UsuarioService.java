@@ -30,4 +30,8 @@ public class UsuarioService implements Serializable {
     public void remover(Usuario usuario) {
         usuarioRepository.remover(usuario.getId());
     }
+
+    public List<Usuario> listarTodos() {
+        return usuarioRepository.listarTodos();
+    }
 }

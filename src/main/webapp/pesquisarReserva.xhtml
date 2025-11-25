@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Gerenciar Reservas</title>
+</h:head>
+
+<h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
+
+    <h2 style="color:#006d77;">Gerenciamento de Reservas</h2>
+
+    <p:messages id="msgs" autoUpdate="true" closable="true"/>
+
+    <h:form id="formPesquisarReserva">
+
+        <p:panel header="Lista de Reservas">
+
+            <p:outputPanel id="filtrosPesquisarReserva">
+            <div class="p-grid" style="margin-bottom:15px;">
+
+                <div class="p-col-12 p-md-3">
+                    <p:outputLabel value="Data/Hora Início" for="fInicio"/>
+                    <p:datePicker id="fInicio"
+                                  value="#{reservaController.filtroInicio}"
+                                  showTime="true"
+                                  pattern="dd/MM/yyyy HH:mm"/>
+                </div>
+
+                <div class="p-col-12 p-md-3">
+                    <p:outputLabel value="Data/Hora Fim" for="fFim"/>
+                    <p:datePicker id="fFim"
+                                  value="#{reservaController.filtroFim}"
+                                  showTime="true"
+                                  pattern="dd/MM/yyyy HH:mm"/>
+                </div>
+
+                <div class="p-col-12 p-md-3">
+                    <p:outputLabel value="Usuário" for="fUsuario"/>
+                    <p:selectOneMenu id="fUsuario"
+                                     value="#{reservaController.filtro.usuario}"
+                                     converter="usuarioConverter">
+                        <f:selectItem itemLabel="Todos" itemValue="#{null}" />
+                        <f:selectItems value="#{reservaController.usuarios}"
+                                       var="u"
+                                       itemLabel="#{u.nome}"
+                                       itemValue="#{u}" />
+                    </p:selectOneMenu>
+                </div>
+
+                <div class="p-col-12 p-md-3">
+                    <p:outputLabel value="Sala" for="fSala"/>
+                    <p:selectOneMenu id="fSala"
+                                     value="#{reservaController.filtro.sala}"
+                                     converter="salaConverter">
+                        <f:selectItem itemLabel="Todas" itemValue="#{null}" />
+                        <f:selectItems value="#{reservaController.salas}"
+                                       var="s"
+                                       itemLabel="#{s.nome}"
+                                       itemValue="#{s}" />
+                    </p:selectOneMenu>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Pesquisar"
+                                     action="#{reservaController.pesquisar}"
+                                     update="tabelaReservas"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Novo cadastro"
+                                     action="#{reservaController.irParaCadastro}"
+                                     process="@this"
+                                     icon="pi pi-search"
+                                     style="background:#219ebc; border:0;"/>
+                </div>
+
+                <div class="p-col-12 p-md-2" style="margin-top:22px;">
+                    <p:commandButton value="Limpar"
+                                     action="#{reservaController.limpar}"
+                                     process="@this"
+                                     update="filtrosPesquisarReserva tabelaReservas"
+                                     icon="pi pi-times"
+                                     style="background:#8d99ae; border:0;"/>
+                </div>
+
+            </div>
+            </p:outputPanel>
+
+            <p:dataTable id="tabelaReservas"
+                         value="#{reservaController.reservas}"
+                         var="r"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="Nenhuma reserva encontrada">
+
+                <p:column headerText="ID" style="width:80px;">
+                    <h:outputText value="#{r.id}"/>
+                </p:column>
+
+                <p:column headerText="Usuário">
+                    <h:outputText value="#{r.usuario.nome}"/>
+                </p:column>
+
+                <p:column headerText="Sala">
+                    <h:outputText value="#{r.sala.nome}"/>
+                </p:column>
+
+                <p:column headerText="Início">
+                    <h:outputText value="#{r.dataHoraInicio}"/>
+                </p:column>
+
+                <p:column headerText="Término">
+                    <h:outputText value="#{r.dataHoraTermino}"/>
+                </p:column>
+
+                <p:column headerText="Status">
+                    <h:outputText value="#{r.status.nome}"/>
+                </p:column>
+
+                <p:column headerText="Ações" style="width:150px; text-align:center;">
+
+                    <p:commandButton icon="pi pi-pencil"
+                                     action="#{reservaController.irParaEdicao(r)}"
+                                     update="tabelaReservas"
+                                     style="margin-right:8px;"/>
+
+                    <p:commandButton icon="pi pi-trash"
+                                     action="#{reservaController.remover(r)}"
+                                     update="tabelaReservas msgs"
+                                     onclick="return confirm('Deseja realmente excluir?');"
+                                     style="color:#e63946;"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>
