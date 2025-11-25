@@ -63,9 +63,9 @@ public class UsuarioController extends Controller implements Serializable {
         }
         usuarioService.salvar(this.usuario);
         if(novoCadastro) {
-            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente cadastrado com sucesso");
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Usuario cadastrado com sucesso");
         } else  {
-            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente editado com sucesso");
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Usuario editado com sucesso");
         }
     }
 

@@ -19,10 +19,6 @@ public class ReservaRepository extends Repository<Reserva, Long> implements Seri
     @Named("emPostgres")
     private EntityManager entityManager;
 
-    /**
-     * Pesquisa utilizando filtros simples:
-     * sala, usuário, período.
-     */
     public List<Reserva> pesquisarComFiltros(Reserva filtro) {
 
         StringBuilder jpql = new StringBuilder("SELECT r FROM Reserva r WHERE 1=1");
@@ -64,9 +60,6 @@ public class ReservaRepository extends Repository<Reserva, Long> implements Seri
         return query.getResultList();
     }
 
-    /**
-     * Verifica conflito de horários.
-     */
     public boolean existeConflito(Reserva reserva) {
         String jpql =
                 "SELECT COUNT(r) FROM Reserva r " +

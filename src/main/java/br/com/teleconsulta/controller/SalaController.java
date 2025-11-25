@@ -70,9 +70,9 @@ public class SalaController extends Controller implements Serializable {
         }
         salaService.salvar(this.sala);
         if(novoCadastro) {
-            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente cadastrado com sucesso");
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Sala cadastrado com sucesso");
         } else  {
-            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente editado com sucesso");
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Sala editado com sucesso");
         }
     }
 

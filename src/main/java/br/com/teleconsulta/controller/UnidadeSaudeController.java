@@ -36,6 +36,7 @@ public class UnidadeSaudeController extends Controller implements Serializable {
         pesquisar();
         if(unidadeSaude == null) {
             unidadeSaude = new UnidadeSaude();
+            unidadeSaude.setEndereco(new Endereco());
         }
     }
 
@@ -66,9 +67,9 @@ public class UnidadeSaudeController extends Controller implements Serializable {
         }
         unidadeSaudeService.salvar(this.unidadeSaude);
         if(novoCadastro) {
-            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente cadastrado com sucesso");
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Unidade de Saude cadastrado com sucesso");
         } else  {
-            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Paciente editado com sucesso");
+            addMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Unidade de Saude editado com sucesso");
         }
     }
 

@@ -1,8 +1,6 @@
 package br.com.teleconsulta.service;
 
-import br.com.teleconsulta.model.Paciente;
 import br.com.teleconsulta.model.Reserva;
-import br.com.teleconsulta.repository.PacienteRepository;
 import br.com.teleconsulta.repository.ReservaRepository;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
