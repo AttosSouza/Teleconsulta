@@ -1,39 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="3.1" xmlns="https://jakarta.ee/xml/ns/persistence"
+<persistence version="3.1"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
                                  https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd">
 
-    <!-- POSTGRES -->
     <persistence-unit name="teleconsultaPU_postgres" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <properties>
+            <!-- Configuração via variáveis do Tomcat (CATALINA_OPTS) -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/teleconsulta"/>
-            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
-            <property name="jakarta.persistence.jdbc.password" value="9798"/>
+
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}"/>
+
+            <property name="jakarta.persistence.jdbc.user" value="${DB_USER}"/>
+            <property name="jakarta.persistence.jdbc.password" value="${DB_PASS}"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.transaction.coordinator_class" value="jdbc"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.show_sql" value="true"/>
-        </properties>
-    </persistence-unit>
-
-
-    <!-- SQLITE -->
-    <persistence-unit name="teleconsultaPU_sqlite" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
-        <properties>
-            <property name="jakarta.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:teleconsulta.db"/>
-
-            <property name="hibernate.dialect" value="org.hibernate.community.dialect.SQLiteDialect"/>
-            <property name="hibernate.transaction.coordinator_class" value="jdbc"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
 
