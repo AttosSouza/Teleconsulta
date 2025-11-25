@@ -28,11 +28,19 @@ public class SalaRepository extends Repository<Sala, Long> implements Serializab
             jpql.append(" AND UPPER(s.nome) LIKE :nome");
         }
 
+        if (sala.getUnidadeSaude() != null && sala.getUnidadeSaude().getId() != null) {
+            jpql.append(" AND s.unidadeSaude.id = :unidadeId");
+        }
+
         TypedQuery<Sala> query =
                 entityManager.createQuery(jpql.toString(), Sala.class);
 
         if (sala.getNome() != null && !sala.getNome().trim().isBlank()) {
             query.setParameter("nome", "%" + sala.getNome().toUpperCase() + "%");
+        }
+
+        if (sala.getUnidadeSaude() != null && sala.getUnidadeSaude().getId() != null) {
+            query.setParameter("unidadeId", sala.getUnidadeSaude().getId());
         }
 
         return query.getResultList();
