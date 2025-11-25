@@ -74,7 +74,7 @@ public class UnidadeSaudeController extends Controller implements Serializable {
 
     public String cancelar () {
         limpar();
-        return "pesquisarUnidadeSaude?faces-redirect=true";
+        return "/pesquisarUnidadeSaude.xhtml?faces-redirect=true";
     }
 
     public String irParaEdicao (UnidadeSaude unidadeSaude) {

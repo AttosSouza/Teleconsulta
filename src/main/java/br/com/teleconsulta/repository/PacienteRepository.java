@@ -18,116 +18,53 @@ public class PacienteRepository extends Repository<Paciente, Long> implements Se
     @Named("emPostgres")
     private EntityManager entityManager;
 
-//    public Paciente buscarPorId(Long id) {
-//        return entityManager.find(Paciente.class, id);
-//    }
-
-//    public List<Paciente> listarTodos() {
-//        String jpql = "SELECT * FROM Paciente" ;
-//
-//        TypedQuery<Paciente> query = entityManager
-//                .createQuery(jpql, Paciente.class);
-//
-//        return query.getResultList();
-//    }
-
     public List<Paciente> pesquisarComFiltros(Paciente paciente) {
 
-        StringBuilder jpql = new StringBuilder("SELECT p FROM Paciente p WHERE 1=1");
+        var cb = entityManager.getCriteriaBuilder();
+        var cq = cb.createQuery(Paciente.class);
+        var root = cq.from(Paciente.class);
+
+        List<jakarta.persistence.criteria.Predicate> predicates = new java.util.ArrayList<>();
 
         if (paciente.getNome() != null && !paciente.getNome().trim().isBlank()) {
-            jpql.append(" AND UPPER(p.nome) LIKE :nome");
+            predicates.add(
+                    cb.like(
+                            cb.upper(root.get("nome")),
+                            "%" + paciente.getNome().toUpperCase() + "%"
+                    )
+            );
         }
 
         if (paciente.getNomeSocial() != null && !paciente.getNomeSocial().trim().isBlank()) {
-            jpql.append(" AND UPPER(p.nomeSocial) LIKE :nome_social");
+            predicates.add(
+                    cb.like(
+                            cb.upper(root.get("nomeSocial")),
+                            "%" + paciente.getNomeSocial().toUpperCase() + "%"
+                    )
+            );
         }
 
         if (paciente.getCpf() != null && !paciente.getCpf().trim().isBlank()) {
-            jpql.append(" AND p.cpf = :cpf");
+            predicates.add(
+                    cb.equal(root.get("cpf"), paciente.getCpf())
+            );
         }
 
         if (paciente.getRg() != null && !paciente.getRg().trim().isBlank()) {
-            jpql.append(" AND UPPER(p.rg) = :rg");
+            predicates.add(
+                    cb.equal(cb.upper(root.get("rg")), paciente.getRg().toUpperCase())
+            );
         }
 
         if (paciente.getCns() != null && !paciente.getCns().trim().isBlank()) {
-            jpql.append(" AND UPPER(p.cns) = :cns");
+            predicates.add(
+                    cb.equal(cb.upper(root.get("cns")), paciente.getCns().toUpperCase())
+            );
         }
 
-        TypedQuery<Paciente> query =
-                entityManager.createQuery(jpql.toString(), Paciente.class);
+        cq.where(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
 
-        if (paciente.getNome() != null && !paciente.getNome().trim().isBlank()) {
-            query.setParameter("nome", "%" + paciente.getNome().toUpperCase() + "%");
-        }
-
-        if (paciente.getNomeSocial() != null && !paciente.getNomeSocial().trim().isBlank()) {
-            query.setParameter("nome_social", "%" + paciente.getNomeSocial().toUpperCase() + "%");
-        }
-
-        if (paciente.getCpf() != null && !paciente.getCpf().trim().isBlank()) {
-            query.setParameter("cpf", paciente.getCpf());
-        }
-
-        if (paciente.getRg() != null && !paciente.getRg().trim().isBlank()) {
-            query.setParameter("rg", paciente.getRg().toUpperCase());
-        }
-
-        if (paciente.getCns() != null && !paciente.getCns().trim().isBlank()) {
-            query.setParameter("cns", paciente.getCns().toUpperCase());
-        }
-
-        return query.getResultList();
+        return entityManager.createQuery(cq).getResultList();
     }
-
-
-//    public void salvar(Paciente paciente) {
-//        try {
-//            entityManager.getTransaction().begin();
-//
-//            if (paciente.getId() == null) {
-//                entityManager.persist(paciente);
-//            } else {
-//                entityManager.merge(paciente);
-//            }
-//
-//            entityManager.getTransaction().commit();
-//        }catch (Exception e) {
-//            if(entityManager.getTransaction().isActive()) {
-//                entityManager.getTransaction().rollback();
-//            }
-//            throw e;
-//        } finally {
-//            if(entityManager.isOpen()) {
-//                entityManager.close();
-//            }
-//        }
-//    }
-
-//    public void remover(Paciente paciente) {
-//        try {
-//            entityManager.getTransaction().begin();
-//
-//            Paciente p = entityManager.find(Paciente.class, paciente.getId());
-//
-//            if(p != null) {
-//                entityManager.remove(p);
-//            }
-//
-//            entityManager.getTransaction().commit();
-//        }catch (Exception e) {
-//            if(entityManager.getTransaction().isActive()) {
-//                entityManager.getTransaction().rollback();
-//            }
-//            throw e;
-//        } finally {
-//            if(entityManager.isOpen()) {
-//                entityManager.close();
-//            }
-//        }
-//    }
-
-
 
 }

@@ -7,6 +7,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,30 +22,37 @@ public class UsuarioRepository extends Repository<Usuario, Long> implements Seri
     @Named("emPostgres")
     private EntityManager entityManager;
 
-    public List<Usuario> pesquisarComFiltros(Usuario usuario) {
+    public List<Usuario> pesquisarComFiltros(Usuario filtro) {
 
-        StringBuilder jpql = new StringBuilder("SELECT u FROM Usuario u WHERE 1=1");
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
+        Root<Usuario> root = cq.from(Usuario.class);
 
-        if (usuario.getNome() != null && !usuario.getNome().trim().isBlank()) {
-            jpql.append(" AND UPPER(u.nome) LIKE :nome");
+        List<Predicate> predicates = new java.util.ArrayList<>();
+
+        if (filtro.getNome() != null && !filtro.getNome().trim().isBlank()) {
+            predicates.add(
+                    cb.like(
+                            cb.upper(root.get("nome")),
+                            "%" + filtro.getNome().trim().toUpperCase() + "%"
+                    )
+            );
         }
 
-        if (usuario.getCpf() != null && !usuario.getCpf().trim().isBlank()) {
-            jpql.append(" AND u.cpf = :cpf");
+        if (filtro.getCpf() != null && !filtro.getCpf().trim().isBlank()) {
+            predicates.add(
+                    cb.equal(
+                            root.get("cpf"),
+                            filtro.getCpf().trim()
+                    )
+            );
         }
 
+        cq.where(predicates.toArray(new Predicate[0]));
 
-        TypedQuery<Usuario> query =
-                entityManager.createQuery(jpql.toString(), Usuario.class);
+        cq.orderBy(cb.asc(root.get("nome")));
 
-        if (usuario.getNome() != null && !usuario.getNome().trim().isBlank()) {
-            query.setParameter("nome", "%" + usuario.getNome().toUpperCase() + "%");
-        }
-
-        if (usuario.getCpf() != null && !usuario.getCpf().trim().isBlank()) {
-            query.setParameter("cpf", usuario.getCpf());
-        }
-
+        TypedQuery<Usuario> query = entityManager.createQuery(cq);
         return query.getResultList();
     }
 

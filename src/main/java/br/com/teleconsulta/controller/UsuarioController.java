@@ -71,7 +71,8 @@ public class UsuarioController extends Controller implements Serializable {
 
     public String cancelar () {
         limpar();
-        return "pesquisarUsuario?faces-redirect=true";
+        // return "pesquisarUsuario?faces-redirect=true";
+        return "/pesquisarUsuario.xhtml?faces-redirect=true";
     }
 
     public String irParaEdicao (Usuario usuario) {

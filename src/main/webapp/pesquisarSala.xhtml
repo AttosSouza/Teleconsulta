@@ -10,7 +10,17 @@
 
 <h:body style="font-family:Arial; background:#f5f5f5; padding:20px;">
 
-    <h2 style="color:#006d77;">Gerenciamento de Salas</h2>
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <h2 style="color:#006d77; margin:0;">Gerenciamento de Salas</h2>
+
+        <h:form>
+            <p:commandButton value="Voltar"
+                             icon="pi pi-arrow-left"
+                             action="index.xhtml?faces-redirect=true"
+                             process="@this"
+                             style="background:#8d99ae; border:0;" />
+        </h:form>
+    </div>
 
     <p:messages id="msgs" autoUpdate="true" closable="true"/>
 
@@ -47,7 +57,7 @@
                     <p:commandButton value="Novo cadastro"
                                      action="#{salaController.irParaCadastro}"
                                      process="@this"
-                                     icon="pi pi-search"
+                                     icon="pi pi-plus"
                                      style="background:#219ebc; border:0;"/>
                 </div>
 

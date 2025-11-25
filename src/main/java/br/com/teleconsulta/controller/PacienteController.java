@@ -74,7 +74,7 @@ public class PacienteController extends Controller implements Serializable {
 
     public String cancelar () {
         limpar();
-        return "pesquisarPaciente?faces-redirect=true";
+        return "/pesquisarPaciente.xhtml?faces-redirect=true";
     }
 
     public String irParaEdicao (Paciente paciente) {

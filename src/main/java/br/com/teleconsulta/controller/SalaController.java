@@ -78,7 +78,7 @@ public class SalaController extends Controller implements Serializable {
 
     public String cancelar () {
         limpar();
-        return "pesquisarSala?faces-redirect=true";
+        return "/pesquisarSala.xhtml?faces-redirect=true";
     }
 
     public String irParaEdicao (Sala sala) {

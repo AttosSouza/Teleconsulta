@@ -119,7 +119,7 @@ public class ReservaController extends Controller implements Serializable {
     }
 
     public String cancelar() {
-        return "pesquisarReserva?faces-redirect=true";
+        return "/pesquisarReserva.xhtml?faces-redirect=true";
     }
 
     public Reserva getFiltro() {
