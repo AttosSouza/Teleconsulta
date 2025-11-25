@@ -81,9 +81,25 @@
         </navigation-case>
 
         <navigation-case>
+            <from-outcome>pesquisarReserva</from-outcome>
+
+            <to-view-id>/pesquisarReserva.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
             <from-outcome>cadastroReserva</from-outcome>
 
             <to-view-id>/cadastroReserva.xhtml</to-view-id>
+
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>consultarDisponibilidade</from-outcome>
+
+            <to-view-id>/consultarDisponibilidade.xhtml</to-view-id>
 
             <redirect/>
         </navigation-case>

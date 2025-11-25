@@ -69,9 +69,21 @@
             <h3 style="color:#023047;">Reserva</h3>
             <p style="color:#555;">Gerencie reservas existentes.</p>
             <p:commandButton value="Acessar"
-                             onclick="window.location='reserva.xhtml'"
+                             action="pesquisarReserva?faces-redirect=true"
                              style="width:100%; background:#219ebc; border:0;"/>
         </div>
+
+        <div style="width:260px; background:white; padding:25px; border-radius:12px;
+                    box-shadow:0 0 12px rgba(0,0,0,0.1); text-align:center;">
+            <h3 style="color:#023047;">Consultar Disponibilidade</h3>
+            <p style="color:#555;">Veja quais salas estão livres.</p>
+
+            <p:commandButton value="Acessar"
+                             action="consultarDisponibilidade?faces-redirect=true"
+                             style="width:100%; background:#219ebc; border:0;"/>
+        </div>
+
+
 
     </div>
 

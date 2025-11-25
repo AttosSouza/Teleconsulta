@@ -1,11 +1,13 @@
 package br.com.teleconsulta.service;
 
 import br.com.teleconsulta.model.Sala;
+import br.com.teleconsulta.model.UnidadeSaude;
 import br.com.teleconsulta.repository.SalaRepository;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Dependent
@@ -32,6 +34,10 @@ public class SalaService implements Serializable {
 
     public List<Sala> listarTodos() {
         return salaRepository.listarTodos();
+    }
+
+    public List<Sala> buscarSalasDisponiveis(UnidadeSaude unidade, LocalDateTime inicio, LocalDateTime fim) {
+        return salaRepository.buscarSalasDisponiveis(unidade, inicio, fim);
     }
 
 }
